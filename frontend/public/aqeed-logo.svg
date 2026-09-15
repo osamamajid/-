@@ -1,0 +1,39 @@
+<svg width="1100" height="260" viewBox="0 0 1100 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#123B66"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="20" y1="20" x2="190" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2DD4BF"/>
+      <stop offset="1" stop-color="#5EEAD4"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="100" y1="0" x2="180" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7D992"/>
+      <stop offset="1" stop-color="#D4AF6A"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="24" y="24" width="212" height="212" rx="54" fill="url(#bg)"/>
+
+  <path d="M78 82C78 72.0589 86.0589 64 96 64H168C185.673 64 200 78.3269 200 96V164C200 181.673 185.673 196 168 196H96C86.0589 196 78 187.941 78 178V82Z" fill="#F8FAFC" fill-opacity="0.96"/>
+  <path d="M168 64L200 96H168V64Z" fill="#E2E8F0"/>
+
+  <path d="M104 96H160" stroke="#0F172A" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <path d="M104 118H176" stroke="#0F172A" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+  <path d="M104 140H162" stroke="#0F172A" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+  <path d="M104 162H149" stroke="#0F172A" stroke-width="8" stroke-linecap="round" opacity="0.65"/>
+
+  <circle cx="169" cy="142" r="31" fill="url(#accent)"/>
+  <path d="M154 142L165 152L184 128" stroke="#0F172A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M90 174C103 157 124 145 147 145C162 145 175 149 186 158" stroke="url(#gold)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M111 188C122 180 133 176 146 176C159 176 172 181 183 190" stroke="url(#gold)" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+
+  <g>
+    <text x="280" y="122" fill="#0F172A" font-size="86" font-weight="700" font-family="Segoe UI, Arial, sans-serif" letter-spacing="-2">Aqeed</text>
+    <text x="286" y="164" fill="#123B66" font-size="24" font-weight="600" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">DIGITAL CONTRACTS</text>
+    <line x1="286" y1="176" x2="610" y2="176" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round"/>
+    <text x="286" y="214" fill="#5B6B82" font-size="22" font-weight="500" font-family="Segoe UI, Arial, sans-serif" letter-spacing="1">عقود ذكية • توقيع إلكتروني • وثوقية</text>
+  </g>
+</svg>
