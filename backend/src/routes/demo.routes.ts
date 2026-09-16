@@ -8,7 +8,7 @@ import { sendSuccess, sendError } from '../utils/response.utils';
 
 const router = Router();
 
-// Demo 1-click login endpoint - strictly disabled in production
+// Demo 1-click login endpoint - restricted to demo/development environments
 router.post('/login', authLimiter, async (req: Request, res: Response) => {
   if (process.env.NODE_ENV !== 'demo' && process.env.NODE_ENV !== 'development') {
     return sendError(res, 'تسجيل الدخول التجريبي السريع متاح فقط في بيئة العرض التجريبي', 403);

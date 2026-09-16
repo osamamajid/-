@@ -44,14 +44,7 @@
    ```
    *(استبدل الرابط برابط الخادم الخلفي الفعلي متبوعاً بـ `/api`)*.
 4. **التوجيه (SPA Routing)**:
-   - تم إنشاء ملف `frontend/vercel.json` تلقائياً لتفادي أخطاء 404 عند تحديث الصفحة أو فتح المسارات مباشرة:
-   ```json
-   {
-     "rewrites": [
-       { "source": "/(.*)", "destination": "/index.html" }
-     ]
-   }
-   ```
+   - تم إنشاء ملف `frontend/vercel.json` لتفادي أخطاء 404 عند تحديث الصفحة أو فتح المسارات مباشرة
 5. **البناء والنشر**:
    - Build Command: `npm run build`
    - Output Directory: `dist`
@@ -64,25 +57,29 @@
 ### الخيار الأفضل: Render أو Railway
 
 1. **إنشاء خدمة ويب (Web Service)**:
-   - في Render أو Railway، اربط المستودع وحدد المجلد: `backend`.
-   - **Build Command**: `npm install && npm run build`
-   - **Start Command**: `node dist/app.js`
+    - في Render أو Railway، اربط المستودع وحدد المجلد: `backend`.
+    - **Build Command**: `npm install && npx prisma generate && npm run build`
+    - **Start Command**: `npm start`
 2. **متغيرات البيئة الإلزامية (Required Environment Variables)**:
-   ```env
-   PORT=10000
-   NODE_ENV=demo
-   DATABASE_URL=postgresql://user:password@host:5432/dbname?schema=public
-   JWT_SECRET=super_secret_jwt_key_min_32_characters_long_2026
-   JWT_EXPIRES_IN=7d
-   CORS_ORIGIN=https://your-frontend-domain.vercel.app
-   ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
-   ```
+    ```env
+    PORT=5000
+    NODE_ENV=demo
+    DATABASE_URL=postgresql://user:password@host:5432/dbname?schema=public
+    JWT_SECRET=your_secure_jwt_key_min_32_characters
+    JWT_EXPIRES_IN=7d
+    ALLOWED_ORIGINS=https://your-frontend-domain.vercel.app
+    ```
 3. **تطبيق الترحيل وبذر البيانات**:
-   - داخل لوحة Render/Railway Shell:
-   ```bash
-   npx prisma migrate deploy
-   npm run db:seed
-   ```
+    - داخل لوحة Render/Railway Shell:
+    ```bash
+    npx prisma migrate deploy
+    npm run db:seed
+    ```
+4. **فحص الحالة (Health Check)**:
+    - `GET /health` — يرجع `{"status": "ok"}`
+    - `GET /api/health` — يرجع حالة النظام التفصيلية
+
+> ملاحظة: تسجيل الدخول التجريبي (`POST /api/demo/login`) يعمل فقط عندما يكون `NODE_ENV=demo`. تأكد من ضبط هذا المتغير.
 
 ### خيار VPS باستخدام Docker Compose:
 ```bash
@@ -114,12 +111,13 @@ docker compose exec backend npm run db:seed
 | المتغير | الوصف | مثال توضيحي |
 |---|---|---|
 | `PORT` | منفذ تشغيل الخادم | `5000` أو `10000` |
-| `NODE_ENV` | بيئة التشغيل (إلزامي للعرض التجريبي) | `demo` |
+| `NODE_ENV` | بيئة التشغيل (إلزامي لتفعيل Demo) | `demo` |
 | `DATABASE_URL` | رابط الاتصال بقاعدة بيانات PostgreSQL | `postgresql://user:pass@host:5432/db?schema=public` |
 | `JWT_SECRET` | مفتاح التشفير لجلسات الدخول (32+ حرف) | `aqeed_demo_secure_key_2026_xyz...` |
 | `JWT_EXPIRES_IN` | مدة صلاحية الجلسة | `7d` |
-| `CORS_ORIGIN` | نطاق الواجهة الأمامية المسموح | `https://aqeed-demo.vercel.app` |
 | `ALLOWED_ORIGINS` | قائمة النطاقات المفصولة بفواصل | `https://aqeed-demo.vercel.app` |
+
+> **ملاحظة**: `CORS_ORIGIN` غير مستخدم حالياً. يتم التحكم في CORS عبر `ALLOWED_ORIGINS`.
 
 ### الواجهة الأمامية (Frontend)
 | المتغير | الوصف | مثال توضيحي |
@@ -152,12 +150,19 @@ cd backend && npm run dev
 
 ## 7. بيانات الحساب التجريبي (Demo Credentials)
 
+> **مهم**: تسجيل الدخول التجريبي (`POST /api/demo/login`) يعمل فقط عندما يكون `NODE_ENV=demo`. في بيئة `production` العادية، يتم تسجيل الدخول عبر `POST /api/auth/login` باستخدام بيانات مسجل.
+
 ```yaml
 الدخول السريع: زر "دخول النسخة التجريبية مباشرة" بضغطة واحدة من صفحة الدخول
 اسم المستخدم اليدوي: demo
 كلمة المرور: Demo@12345
 الدور: DEMO
 ```
+
+*بيانات الدخول اليدوية (لن تحتاجها في بيئة Demo عبر API):*
+- Admin: `admin` / `Admin@123456`
+- Employee: `employee` / `Emp@123456`
+- Viewer: `viewer` / `View@123456`
 
 ### صلاحيات الحساب التجريبي المتاحة:
 - ✅ استعراض لوحة التحكم والإحصائيات
@@ -179,6 +184,17 @@ cd backend && npm run dev
 ---
 
 ## 8. فحص جاهزية الخادم (Health Check)
+
+```http
+GET /health
+```
+
+الاستجابة المتوقعة:
+```json
+{
+  "status": "ok"
+}
+```
 
 ```http
 GET /api/health

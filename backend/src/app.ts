@@ -46,7 +46,12 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // General rate limiting
 app.use('/api', apiLimiter);
 
-// Health check
+// Health Check (plain)
+app.get('/health', (req, res) => {
+  return res.status(200).json({ status: 'ok' });
+});
+
+// Health Check (detailed)
 app.get('/api/health', (req, res) => {
   return sendSuccess(res, {
     status: 'UP',
