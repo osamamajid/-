@@ -160,7 +160,7 @@ export const ProductTour: React.FC<ProductTourProps> = ({ isOpen, onClose, onCom
 
   const scrollToTarget = useCallback((selector: string) => {
     if (!selector) return;
-    const element = document.querySelector(selector);
+    const element = document.querySelector<HTMLElement>(selector);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       targetRef.current = element;
@@ -311,7 +311,7 @@ export const ProductTour: React.FC<ProductTourProps> = ({ isOpen, onClose, onCom
                 onClick={handleSkip}
                 className="text-xs text-slate-500 hover:text-rose-600"
               >
-                <SkipNext className="w-3.5 h-3.5 mr-1" />
+                <FastForward className="w-3.5 h-3.5 mr-1" />
                 تخطي الجولة
               </Button>
               <div className="flex items-center gap-2 ml-auto">
@@ -347,7 +347,7 @@ export const ProductTour: React.FC<ProductTourProps> = ({ isOpen, onClose, onCom
       )}
 
       {/* Highlight style injection */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .tour-highlight {
           box-shadow: 0 0 0 4px #10b981, 0 0 0 8px rgba(16, 185, 129, 0.3) !important;
           border-radius: 8px !important;
@@ -355,7 +355,7 @@ export const ProductTour: React.FC<ProductTourProps> = ({ isOpen, onClose, onCom
           z-index: 50 !important;
           position: relative !important;
         }
-      `}</style>
+      `}} />
     </div>
   );
 };
@@ -421,3 +421,4 @@ export const resetTour = (): void => {
   if (typeof window === 'undefined') return;
   localStorage.removeItem(TOUR_STORAGE_KEY);
   localStorage.removeItem(TOUR_STEP_STORAGE_KEY);
+};

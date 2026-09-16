@@ -2,10 +2,12 @@ import { Router } from 'express';
 import { SettingController } from '../controllers/setting.controller';
 import { authenticate } from '../middleware/auth.middleware';
 import { requireRoles } from '../middleware/rbac.middleware';
+import { demoProtection } from '../middleware/demo.middleware';
 
 const router = Router();
 
 router.use(authenticate);
+router.use(demoProtection);
 
 // جلب الإعدادات متاح لجميع المستخدمين الموثقين لعرض معلومات الشركة في العقود والطباعة
 router.get('/', SettingController.getSettings);

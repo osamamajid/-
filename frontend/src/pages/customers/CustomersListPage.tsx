@@ -179,6 +179,7 @@ export const CustomersListPage: React.FC = () => {
             onClick={handleOpenAdd}
             icon={<Plus className="w-5 h-5" />}
             className="shadow-emerald-600/20"
+            data-tour="add-customer"
           >
             إضافة عميل جديد
           </Button>

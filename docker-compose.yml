@@ -7,9 +7,9 @@ services:
     container_name: aqeed_postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword2026
-      POSTGRES_DB: aqeed_db
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-aqeed_db}
     ports:
       - "5432:5432"
     volumes:
@@ -17,7 +17,7 @@ services:
     networks:
       - aqeed_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -33,12 +33,13 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      PORT: 5000
-      NODE_ENV: production
-      DATABASE_URL: postgresql://postgres:postgrespassword2026@postgres:5432/aqeed_db?schema=public
-      JWT_SECRET: aqeed_super_secret_jwt_key_2026_contracts_system_secure_random
-      JWT_EXPIRES_IN: 7d
-      CORS_ORIGIN: http://localhost
+      PORT: ${PORT:-5000}
+      NODE_ENV: ${NODE_ENV:-production}
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
     ports:
       - "5000:5000"
     networks:

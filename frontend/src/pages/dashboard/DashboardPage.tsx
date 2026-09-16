@@ -117,6 +117,7 @@ export const DashboardPage: React.FC = () => {
             onClick={() => navigate('/contracts/create')}
             icon={<Plus className="w-5 h-5" />}
             className="shadow-emerald-600/30"
+            data-tour="quick-create"
           >
             إنشاء عقد جديد
           </Button>

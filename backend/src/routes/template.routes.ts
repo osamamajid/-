@@ -9,10 +9,12 @@ import {
   addFieldSchema,
   updateFieldSchema,
 } from '../validators/template.validator';
+import { demoProtection } from '../middleware/demo.middleware';
 
 const router = Router();
 
 router.use(authenticate);
+router.use(demoProtection);
 
 // الكل يستطيع رؤية أنواع العقود لإنشاء العقود
 router.get('/', TemplateController.getContractTypes);

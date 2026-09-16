@@ -379,13 +379,16 @@ export const CreateContractPage: React.FC<{ mode?: 'create' | 'edit' }> = ({ mod
           <Card
             title={`الخطوة 3: حقول وبيانات ${selectedType.name}`}
             subtitle="املأ البيانات الخاصة بموضوع هذا العقد وفق النموذج المعتمد"
+            className="mb-6"
           >
-            <DynamicFieldsForm
-              fields={selectedType.fields || []}
-              values={dynamicValues}
-              onChange={handleDynamicChange}
-              errors={fieldErrors}
-            />
+            <div data-tour="dynamic-fields">
+              <DynamicFieldsForm
+                fields={selectedType.fields || []}
+                values={dynamicValues}
+                onChange={handleDynamicChange}
+                errors={fieldErrors}
+              />
+            </div>
           </Card>
         )}
 

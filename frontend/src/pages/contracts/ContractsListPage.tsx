@@ -192,6 +192,7 @@ export const ContractsListPage: React.FC = () => {
             onClick={() => navigate('/contracts/create')}
             icon={<Plus className="w-5 h-5" />}
             className="shadow-emerald-600/20"
+            data-tour="create-contract"
           >
             إنشاء عقد جديد
           </Button>

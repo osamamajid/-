@@ -9,6 +9,7 @@ import userRoutes from './user.routes';
 import auditRoutes from './audit.routes';
 import settingRoutes from './setting.routes';
 import activityRoutes from './activity.routes';
+import demoRoutes from './demo.routes';
 
 const apiRouter = Router();
 
@@ -23,5 +24,6 @@ apiRouter.use('/users', userRoutes);
 apiRouter.use('/audit-logs', auditRoutes);
 apiRouter.use('/activity', activityRoutes);
 apiRouter.use('/settings', settingRoutes);
+apiRouter.use('/demo', demoRoutes);
 
 export default apiRouter;

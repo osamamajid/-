@@ -11,7 +11,7 @@ export const DemoBanner: React.FC = () => {
   if (!isDemoUser || dismissed) return null;
 
   return (
-    <div className="fixed top-20 right-4 left-4 lg:right-8 lg:left-auto lg:top-24 lg:w-96 z-40 animate-in slide-in-from-top-2">
+    <div className="fixed top-20 right-4 left-4 lg:right-8 lg:left-auto lg:top-24 lg:w-96 z-40 animate-in slide-in-from-top-2" data-tour="demo-banner">
       <div className="bg-gradient-to-r from-emerald-50 via-emerald-100/50 to-emerald-50 border border-emerald-200 rounded-2xl shadow-lg p-4 flex items-start gap-3">
         <div className="flex-shrink-0 p-2 rounded-xl bg-emerald-500 text-white">
           <Info className="w-5 h-5" />

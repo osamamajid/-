@@ -8,6 +8,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: { username: string; password: string }) => Promise<User>;
+  loginDemo: () => Promise<User>;
   logout: () => void;
   updatePasswordStatus: (mustChange: boolean) => void;
   hasPermission: (permissionCode: string) => boolean;
@@ -54,6 +55,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return data.user;
   };
 
+  const loginDemo = async (): Promise<User> => {
+    const res = await api.post('/demo/login');
+    const data: AuthResponse = res.data.data;
+    localStorage.setItem('aqeed_token', data.token);
+    setToken(data.token);
+    setUser(data.user);
+    return data.user;
+  };
+
   const logout = () => {
     localStorage.removeItem('aqeed_token');
     setToken(null);
@@ -85,6 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: !!token && !!user,
         isLoading,
         login,
+        loginDemo,
         logout,
         updatePasswordStatus,
         hasPermission,

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, Bell, Plus, KeyRound, LogOut, AlertTriangle, ChevronDown } from 'lucide-react';
+import { Menu, Bell, Plus, KeyRound, LogOut, AlertTriangle, ChevronDown, HelpCircle, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
 import api from '../../config/api';
 import { ExpiringAlerts } from '../../types/contract.types';
+import { resetTour } from '../tour/ProductTour';
 
 interface TopbarProps {
   setIsMobileOpen: (open: boolean) => void;
@@ -93,6 +94,7 @@ export const Topbar: React.FC<TopbarProps> = ({ setIsMobileOpen, openChangePassw
             onClick={() => navigate('/contracts/create')}
             icon={<Plus className="w-4 h-4" />}
             className="hidden xs:inline-flex shadow-emerald-600/20"
+            data-tour="quick-create"
           >
             إنشاء عقد جديد
           </Button>
@@ -238,6 +240,18 @@ export const Topbar: React.FC<TopbarProps> = ({ setIsMobileOpen, openChangePassw
               >
                 <KeyRound className="w-4 h-4 text-slate-500" />
                 <span>تغيير كلمة المرور</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsUserMenuOpen(false);
+                  resetTour();
+                }}
+                className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-emerald-700 hover:bg-emerald-50 transition-colors mt-1"
+                data-tour="help-button"
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span>بدء الجولة التعريفية</span>
               </button>
 
               <button

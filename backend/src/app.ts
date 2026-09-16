@@ -1,4 +1,4 @@
-﻿import express from 'express';
+import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import { ENV } from './config/env';
@@ -46,9 +46,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // General rate limiting
 app.use('/api', apiLimiter);
 
-// Demo protection middleware (runs after auth middleware on protected routes)
-app.use('/api', demoProtection);
-
 // Health check
 app.get('/api/health', (req, res) => {
   return sendSuccess(res, {
@@ -72,11 +69,11 @@ app.use(errorHandler);
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(ENV.PORT, () => {
+  app.listen(ENV.PORT, '0.0.0.0', () => {
     console.log(`
   ======================================================
    🚀 خادم عَقيد (Aqeed Backend) يعمل بنجاح!
-   🌐 الرابط: http://localhost:${ENV.PORT}
+   🌐 الرابط: http://0.0.0.0:${ENV.PORT}
    🩺 فحص الحالة: http://localhost:${ENV.PORT}/api/health
    🕒 البيئة: ${ENV.NODE_ENV}
   ======================================================
