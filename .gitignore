@@ -49,6 +49,7 @@ coverage/
 .cache/
 .temp/
 tmp/
+.vercel/
 
 # Prisma
 prisma/*.db
